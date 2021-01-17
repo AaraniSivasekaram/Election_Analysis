@@ -46,12 +46,24 @@ with open(file_to_load) as election_data:
        #3. Total # of votes each candidate recieved
         #Add a vote to that candidate's count
         candidate_votes[candidate_name] += 1 
+    
+    #Save the results to a txt file
+    with open(file_to_save, "w") as txt_file:
+        #Print the final vote count to the terminal
+        election_results = (
+        f"Election Results\n"
+        f"---------------------------\n"
+        f"Total Votes: {total_votes:,}\n"
+        f"---------------------------\n")
+        print(election_results, end="")
+        #Save the final vote count to the text file
+        txt_file.write(election_results)
 
 #4. % of votes each candidate won
 for candidate_name in candidate_votes:
     votes = candidate_votes[candidate_name]
     vote_percentage = float(votes) / float(total_votes) * 100 
-    print(f"{candidate_name} , {total_votes:,} votes, {vote_percentage:.1f}%")
+    #print(f"{candidate_name} , {votes:,} votes, {vote_percentage:.1f}%")
 
     #5. Winner of election based on popular vote
     if (votes > winning_count) and (vote_percentage > winning_percentage):
@@ -66,5 +78,5 @@ winning_candidate_summary = (
     f"Winning Vote Count:{winning_count:,}\n"
     f"Winning Percentage:{winning_percentage:.1f}%\n"
     f"---------------------------\n")
-print(winning_candidate_summary)
+#print(winning_candidate_summary)
     
